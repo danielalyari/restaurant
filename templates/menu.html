@@ -20,6 +20,8 @@
       <div class="card h-100">
         {% if food.image %}
           <img src="{{ food.image.url }}" class="card-img-top" alt="{{ food.name }}">
+        {% else %}
+          <img src="https://via.placeholder.com/300x200?text={{ food.name }}" class="card-img-top" alt="{{ food.name }}">
         {% endif %}
         <div class="card-body text-center">
           <h5 class="card-title">{{ food.name }}</h5>

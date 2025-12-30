@@ -6,6 +6,8 @@
   <div class="col-md-5">
     {% if object.image %}
       <img class="img-fluid rounded" src="{{ object.image.url }}" alt="{{ object.name }}">
+    {% else %}
+      <img class="img-fluid rounded" src="https://via.placeholder.com/400x300?text={{ object.name }}" alt="{{ object.name }}">
     {% endif %}
   </div>
   <div class="col-md-7">

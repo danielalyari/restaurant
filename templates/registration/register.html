@@ -26,6 +26,14 @@
         </div>
 
         <div class="mb-3">
+          <label class="form-label">شماره تلفن</label>
+          {{ form.phone_number }}
+          {% if form.phone_number.errors %}
+            <div class="text-danger small mt-1">{{ form.phone_number.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="mb-3">
           <label class="form-label">رمز عبور</label>
           {{ form.password1 }}
           {% if form.password1.errors %}

@@ -7,7 +7,11 @@ User = get_user_model()
 class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ("username",)
+        fields = ("username", "phone_number")
+        error_messages = {
+            'username': {'required': 'نام کاربری الزامی است.'},
+            'phone_number': {'required': 'شماره تلفن الزامی است.'},
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,6 +25,7 @@ class RegisterForm(UserCreationForm):
         self.fields["username"].label = "نام کاربری"
         self.fields["password1"].label = "رمز عبور"
         self.fields["password2"].label = "تکرار رمز عبور"
+        self.fields["phone_number"].label = "شماره تلفن"
 
         for name, field in self.fields.items():
             field.widget.attrs["class"] = "form-control"
