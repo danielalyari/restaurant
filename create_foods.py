@@ -31,3 +31,4 @@ food3 = Food.objects.get_or_create(
 food3.food_types.add(drink)
 
 print('Foods created')
+
