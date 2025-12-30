@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Order{% endblock %}
+
+{% block content %}
+<h3 class="mb-3">ثبت سفارش برای: {{ object.name }}</h3>
+
+{% if not user.is_authenticated %}
+  <div class="alert alert-warning">
+    برای ثبت سفارش بهتر است وارد شوید. (ولی فعلاً می‌توانی بدون ورود هم سفارش ثبت کنی.)
+  </div>
+{% endif %}
+
+<form method="post" class="card p-3">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-primary" type="submit">ثبت سفارش</button>
+</form>
+{% endblock %}

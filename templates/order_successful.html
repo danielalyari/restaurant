@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Order Successful{% endblock %}
+
+{% block content %}
+<div class="alert alert-success">
+  سفارش شما با موفقیت ثبت شد ✅
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item">نام: {{ name }}</li>
+  <li class="list-group-item">شماره: {{ phone_number }}</li>
+  <li class="list-group-item">تعداد: {{ amount }}</li>
+</ul>
+
+<a class="btn btn-dark mt-3" href="{% url 'menu' %}">برگشت به منو</a>
+{% endblock %}

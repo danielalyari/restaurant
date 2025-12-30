@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}درباره ما{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-9">
+    <div class="card shadow-sm border-0 rounded-4 p-4">
+      <h2 class="fw-bold mb-3">درباره ما</h2>
+      <p class="text-muted mb-4">
+        به رستوران ما خوش آمدید. هدف ما ارائه‌ی غذایی باکیفیت، تازه و خوش‌طعم در محیطی گرم و صمیمی است.
+        ما از مواد اولیه‌ی تازه استفاده می‌کنیم و تجربه‌ی خوبی برای شما می‌سازیم.
+      </p>
+
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="p-3 bg-light rounded-4">
+            <h6 class="fw-bold mb-1">کیفیت بالا</h6>
+            <p class="text-muted mb-0">مواد تازه و پخت حرفه‌ای</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 bg-light rounded-4">
+            <h6 class="fw-bold mb-1">ارسال سریع</h6>
+            <p class="text-muted mb-0">ثبت سفارش راحت و تحویل سریع</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 bg-light rounded-4">
+            <h6 class="fw-bold mb-1">پشتیبانی</h6>
+            <p class="text-muted mb-0">همیشه پاسخگوی شما هستیم</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <p class="mb-0">
+        برای مشاهده منو روی <a href="{% url 'menu' %}">منو</a> کلیک کنید یا از بخش
+        <a href="{% url 'contact_us' %}">تماس با ما</a> پیام بفرستید.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,35 +1,110 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Restaurant{% endblock %}</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Restaurant{% endblock %}</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="/">رستوران من</a>
-        <div>
-            <a class="nav-link d-inline text-white" href="/">خانه</a>
-            <a class="nav-link d-inline text-white" href="/menu/">منو</a>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+      رستوران من
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+
+      <!-- Left side (main links) -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-1">
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">خانه</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'menu' %}">منو</a>
+        </li>
+
+        <!-- Categories dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            دسته‌بندی‌ها
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow nav-dropdown">
+            <li><a class="dropdown-item" href="{% url 'breakfast' %}">صبحانه</a></li>
+            <li><a class="dropdown-item" href="{% url 'lunch' %}">ناهار</a></li>
+            <li><a class="dropdown-item" href="{% url 'persian' %}">ایرانی</a></li>
+            <li><a class="dropdown-item" href="{% url 'fast-food' %}">فست‌فود</a></li>
+            <li><hr class="dropdown-divider"></li>
+
+            <!-- دقیقاً چیزی که خواستی: نوشیدنی توی نوار بالا ولی داخل dropdown -->
+            <li><a class="dropdown-item" href="{% url 'drinks' %}">نوشیدنی</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'about_us' %}">درباره</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact_us' %}">تماس</a>
+        </li>
+      </ul>
+
+      <!-- Right side (search + account) -->
+      <div class="d-flex align-items-center gap-2">
+
+        <!-- Search (optional) -->
+        <form class="d-none d-lg-flex" role="search" action="{% url 'menu' %}" method="get">
+          <input class="form-control form-control-sm nav-search" type="search" name="q" placeholder="جستجو در منو…">
+        </form>
+
+        <!-- Account dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if user.is_authenticated %} اکانت {% else %} ورود/ثبت‌نام {% endif %}
+          </button>
+
+          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
+            {% if user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'profile' %}">پروفایل</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">خروج</a></li>
+            {% else %}
+              <li><a class="dropdown-item" href="{% url 'login' %}">ورود</a></li>
+              <li><a class="dropdown-item" href="{% url 'register' %}">ثبت‌نام</a></li>
+            {% endif %}
+          </ul>
         </div>
+
+      </div>
     </div>
+  </div>
 </nav>
 
-<div class="container my-5">
-    {% block content %}{% endblock %}
-</div>
+<main class="container my-4">
+  {% block content %}{% endblock %}
+</main>
 
-<footer class="bg-dark text-white text-center p-3">
-    © 2025 Restaurant Project
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  © 2025 Restaurant Project
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

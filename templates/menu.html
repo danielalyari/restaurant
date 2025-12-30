@@ -1,22 +1,39 @@
 {% extends 'base.html' %}
-
 {% block title %}Menu{% endblock %}
 
 {% block content %}
 <h2 class="mb-4 text-center">منوی رستوران</h2>
 
+<div class="d-flex flex-wrap gap-2 mb-4 justify-content-center">
+  <a class="btn btn-outline-dark {% if not active_type %}active{% endif %}" href="{% url 'menu' %}">همه</a>
+  {% for t in food_types %}
+    <a class="btn btn-outline-dark {% if active_type == t.title %}active{% endif %}"
+       href="{% url 'menu_by_type' t.title %}">
+      {{ t.title }}
+    </a>
+  {% endfor %}
+</div>
+
 <div class="row">
-    {% for food in foods %}
+  {% for food in foods %}
     <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <img src="{{ food.image.url }}" class="card-img-top" alt="{{ food.name }}">
-            <div class="card-body text-center">
-                <h5 class="card-title">{{ food.name }}</h5>
-                <p class="card-text">{{ food.description }}</p>
-                <span class="badge bg-success">{{ food.price }} تومن</span>
-            </div>
+      <div class="card h-100">
+        {% if food.image %}
+          <img src="{{ food.image.url }}" class="card-img-top" alt="{{ food.name }}">
+        {% endif %}
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ food.name }}</h5>
+          <p class="card-text">{{ food.description }}</p>
+          <span class="badge bg-success">{{ food.price }} تومن</span>
+          <div class="mt-3">
+            <a class="btn btn-primary" href="{% url 'detail' food.pk %}">جزئیات</a>
+            <a class="btn btn-outline-success" href="{% url 'order' food.pk %}">سفارش</a>
+          </div>
         </div>
+      </div>
     </div>
-    {% endfor %}
+  {% empty %}
+    <p class="text-center text-muted">آیتمی برای نمایش وجود ندارد.</p>
+  {% endfor %}
 </div>
 {% endblock %}

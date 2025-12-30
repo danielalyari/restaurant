@@ -11,3 +11,24 @@ body {
 .navbar-brand {
     font-weight: bold;
 }
+
+/* --- Navbar polishing --- */
+.nav-search {
+    width: 220px;
+    border-radius: 999px;
+    padding-right: 12px;
+}
+
+.nav-dropdown {
+    min-width: 220px;
+    border-radius: 14px;
+}
+
+.dropdown-menu .dropdown-item {
+    border-radius: 10px;
+    margin: 2px 8px;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    opacity: 0.95;
+}

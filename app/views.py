@@ -4,13 +4,35 @@ from django.contrib import messages
 
 from .forms import OrderForm
 
-from .models import Food, SuggestionsCritics
+from .models import Food, SuggestionsCritics, FoodType
 
 
 class Home(generic.ListView):
     model = Food
     context_object_name = "foods"
     template_name = "home.html"
+
+
+class Menu(generic.ListView):
+    model = Food
+    context_object_name = "foods"
+    template_name = "menu.html"
+
+    def get_queryset(self):
+        qs = Food.objects.all().prefetch_related("food_types")
+        type_title = self.kwargs.get("type_title")
+        if type_title:
+            qs = qs.filter(food_types__title=type_title)
+        q = self.request.GET.get("q")
+        if q:
+            qs = qs.filter(name__icontains=q)
+        return qs.distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["food_types"] = FoodType.objects.all()
+        context["active_type"] = self.kwargs.get("type_title")
+        return context
 
 
 class Breakfast(Home):
@@ -34,7 +56,7 @@ class FastFoodLunch(LunchBase):
 
 
 class Drink(Home):
-    queryset = Food.objects.filter(food_types__title="نوشیدنی ")
+    queryset = Food.objects.filter(food_types__title="نوشیدنی")
 
 
 class Detail(generic.DetailView):
